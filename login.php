@@ -23,26 +23,40 @@
 
 if (isset($_POST['email']) && isset($_POST['pass'])){
     $file = fopen('users.csv', 'r');
-    $usersArrToRead = (fgetcsv($file, 1000, ',')); // тут что-то не так с типизацией данных, можно брать готовый массив из signup.php но при связи страниц будет видно отображение 2-х форм, а этого хочется избежать 
-    print_r($usersArrToRead);
+    $usersArrToRead = (fgetcsv($file, 1000, ',')); 
     fclose($file);
-    if(!empty(array_search($_POST['email'],$usersArrToRead)) && !empty(array_search($_POST['pass'],$usersArrToRead))){  
+
+// проверочная часть
+    // print_r($usersArrToRead);
+    // print_r ($var);
+    // echo gettype(array_search($_POST['email'],$usersArrToRead));
+    // if (gettype (array_search($_POST['email'],$usersArrToRead)) === 'integer'){
+    //     echo '<br/><br/>Работает   - ' . array_search($_POST['email'],$usersArrToRead);
+    // }
+    // else{
+    //     echo '<br/><br/>НЕ работает   - ' . array_search($_POST['email'],$usersArrToRead);
+    // }
+    
+    if(gettype(array_search($_POST['email'],$usersArrToRead)) === 'integer' && gettype(array_search($_POST['pass'],$usersArrToRead)) === 'integer'){  // не получается создать условие через empty/isset
             session_start();
             $_SESSION['email'] = $_POST['email'];
             // $_SESSION['user']=$_POST['user']; // как присвоить для аккаунта userName нужно сопоставимость строка в csv-файле = один user, как этого достичь?
             $_SESSION['auth'] = true;  
     }
-    if (!isset($_SESSION['auth'])){
-        echo '<br/><br/> Заполните данные корректно если Вы не регестрировались - пройдите регистрацию';
+
+    if (!isset($_SESSION['auth'])){ 
+        echo '<br/><br/> Заполните данные корректно если Вы не регестрировались - пройдите регистрацию'; 
     }
     else{
         echo '<br/><br/>Добро пожаловать ';  // . $_SESSION['user'];
     } 
 }
-elseif($_SESSION['auth'] === false ){ // тут сессия не определенаб не работает
+elseif($_SESSION['auth'] === false ){  /// это условие не рабочее, не добился его вызова, плюс сыпет ошибку если сессия не начата, как ее скрыть?
     echo '<br/><br/>Заполните корректно данные для входа';
 }
 
-if (isset($_SESSION['auth']) || $_SESSION['auth'] === true) { // тут сессия не определенаб не работает
-    echo '<br/><a href="/personal.php"> Личный кабинет </a>';
+if (isset($_SESSION['auth']) && $_SESSION['auth'] === true) { 
+    echo "Личный кабинет <script> window.location = 'personal.php';</script>";
 }
+
+// В какой момент необходимо закрыть сессию?
