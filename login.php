@@ -1,46 +1,49 @@
+<?php
+session_start();
+?>
+
 <link rel="stylesheet" href="./style.css">
-<h1> Вход </h1>
-<form method="POST" action="/login.php"> 
-    <div class="row">
-        <label for="email">Email:</label>
-        <input name="email" id="email" autocomplete="off">
-    </div>
-    <div class="row">
-        <label for="pass">Пароль:</label>
-        <input type="password" name="pass" id="pass">
-    </div>
-    <div class="row">
-        <!-- <a href="?recovery">Забыли пароль?</a> -->
-        <a href="/signup.php">Регистрация</a>
-    </div>
-    <div class="row">
-        <input type="submit"></br></br>
-    </div>
-</form>
+<div class="wrapper">      
+    <main>
+        <div class="back"></div>
+        <div class="sign_wrapp">
+            <h1> Вход </h1>
+            <form method="POST" action="/login.php"> 
+                <div class="row">
+                    <label class="login_label" for="email">Email:</label>
+                    <input class="login_input" name="email" id="email" autocomplete="off">
+                </div>
+                <div class="row">
+                    <label class="login_label" for="pass">Пароль:</label>
+                    <input class="login_input" type="password" name="pass" id="pass">
+                </div>
+                <div class="row">
+                    <!-- <a href="?recovery">Забыли пароль?</a> -->
+                    <a href="/signup.php">Регистрация</a>
+                </div>
+                <div class="row">
+                    <input class="login_input_enter" type="submit"></br></br>
+                </div>
+            </form>
 
 <?php
 
 
 if (isset($_POST['email']) && isset($_POST['pass'])){
     $file = fopen('users.csv', 'r');
-    $usersArrToRead = (fgetcsv($file, 1000, ',')); 
+
+    $logg = [];
+    while (($userData = fgetcsv($file)) != false){ // нужен коммент,  массив не равен false это в каких случаях?
+        if ($_POST['email'] === $userData[0] && $_POST['pass'] === $userData[1]){ 
+            $logg = $userData; // залогированный пользователь
+        }
+    }
     fclose($file);
 
-// проверочная часть
-    // print_r($usersArrToRead);
-    // print_r ($var);
-    // echo gettype(array_search($_POST['email'],$usersArrToRead));
-    // if (gettype (array_search($_POST['email'],$usersArrToRead)) === 'integer'){
-    //     echo '<br/><br/>Работает   - ' . array_search($_POST['email'],$usersArrToRead);
-    // }
-    // else{
-    //     echo '<br/><br/>НЕ работает   - ' . array_search($_POST['email'],$usersArrToRead);
-    // }
-    
-    if(gettype(array_search($_POST['email'],$usersArrToRead)) === 'integer' && gettype(array_search($_POST['pass'],$usersArrToRead)) === 'integer'){  // не получается создать условие через empty/isset
-            session_start();
-            $_SESSION['email'] = $_POST['email'];
-            // $_SESSION['user']=$_POST['user']; // как присвоить для аккаунта userName нужно сопоставимость строка в csv-файле = один user, как этого достичь?
+    if (count($logg)!=0){
+            $_SESSION['id'] = $logg[5]; // new
+            $_SESSION['email'] = $logg[0];
+            $_SESSION['user'] = $logg[2];
             $_SESSION['auth'] = true;  
     }
 
@@ -48,10 +51,11 @@ if (isset($_POST['email']) && isset($_POST['pass'])){
         echo '<br/><br/> Заполните данные корректно если Вы не регестрировались - пройдите регистрацию'; 
     }
     else{
-        echo '<br/><br/>Добро пожаловать ';  // . $_SESSION['user'];
+        echo '<br/><br/>Добро пожаловать' . $_SESSION['user'];  //
     } 
 }
-elseif($_SESSION['auth'] === false ){  /// это условие не рабочее, не добился его вызова, плюс сыпет ошибку если сессия не начата, как ее скрыть?
+elseif (!isset($_POST)){  
+    
     echo '<br/><br/>Заполните корректно данные для входа';
 }
 
@@ -59,4 +63,8 @@ if (isset($_SESSION['auth']) && $_SESSION['auth'] === true) {
     echo "Личный кабинет <script> window.location = 'personal.php';</script>";
 }
 
-// В какой момент необходимо закрыть сессию?
+?>
+
+        </div>
+    </main>
+</div> 

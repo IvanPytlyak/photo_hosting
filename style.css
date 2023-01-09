@@ -1,8 +1,145 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    
+} 
 
-input {
+
+
+.wrapper{
+    margin: 0 auto;
+    width: 1920px;
+    height: 1080px;
+    position: relative;
+}
+
+.back{
+    background: url(./style_photo/1643191422_8-phonoteka-org-p-minimalistichnie-foni-8.jpg) no-repeat;
+    background-size: contain;
     position: absolute;
-    left: 200px;
+    z-index: 0;
+    width: 1920px;
+    height: 1080px;  
+}
+
+
+main{
+    width: 1920px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end; 
+}
+.exit{
+    margin-right: 70px ;
+}
+section {
+    width: 300px;
+    z-index: 1;
+    text-align: center;
+    
+}
+
+.start_a {
+    display: block;
+    text-decoration: none;
+    color: white;
+    font-size: 36px;
+    font-weight: bold;
+    margin: 50px 5px 0 0;
+    border: 6px solid white;
+    box-shadow: 1px 1px 1px gray;
+}
+
+.sign_wrapp{
+    z-index: 1;
+    width: 500px;
+    height: 500px;
+    margin: 200px auto 0 auto;
+    position: relative;
+}
+
+.a_wrap_personal{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    height: 53px;
+    width: calc(295px * 2 + 5px );
+    left: 530px;
+    bottom: 240px;
+}
+
+.sign_wrapp_personal{
+    z-index: 1;
+    width: 1000px;
+    height: 800px;
+    margin: 200px auto 0 auto;
+    position: relative;
+}
+
+
+.sign_wrapp h1, .sign_wrapp_personal h1 {
+    display: block;
+    text-align: center;
+    margin: 0 0 50px 0;
 }
 .row{
-    margin-top: 10px;
+    margin-top: 20px;
 }
+.sign_label, .login_label {
+    z-index: 1;
+    margin-right: 20px;
+    font-size: 24px;
+}
+.sign_input, .login_input{
+    position: absolute;
+    left: 250px;
+    height: 24px;
+    width: 200px;
+}
+.sign_input_enter , .login_input_enter{
+    position: absolute;
+    left: 250px;
+    height: 30px;
+    width: 100px;
+}
+
+.sign_a{
+    position: absolute;
+    height: 53px;
+    width: 295px;
+    z-index: 1;
+    display: block;
+    text-decoration: none;
+    color: white;
+    font-size: 36px;
+    font-weight: bold;
+    margin: 50px 70px 0 0;
+    border: 6px solid white;
+    box-shadow: 1px 1px 1px gray;
+    text-align: center;
+    
+}
+
+.personal_a {
+    height: 53px;
+    width: 295px;
+    z-index: 1;
+    display: block;
+    text-decoration: none;
+    color: white;
+    font-size: 36px;
+    font-weight: bold;
+    border: 6px solid white;
+    box-shadow: 1px 1px 1px gray;
+    text-align: center;
+    margin: 0 5px 0 0;
+}
+
+
+
+
+
+
+
+
