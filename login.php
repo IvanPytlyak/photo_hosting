@@ -34,7 +34,8 @@ if (isset($_POST['email']) && isset($_POST['pass'])){
 
     $logg = [];
     while (($userData = fgetcsv($file)) != false){ // нужен коммент,  массив не равен false это в каких случаях?
-        if ($_POST['email'] === $userData[0] && $_POST['pass'] === $userData[1]){ 
+        // if ($_POST['email'] === $userData[0] && $_POST['pass'] === $userData[1]){ 
+        if ($_POST['email'] === $userData[0] && password_verify($_POST['pass'], $userData[1]) === true){ 
             $logg = $userData; // залогированный пользователь
         }
     }
@@ -62,6 +63,7 @@ elseif (!isset($_POST)){
 if (isset($_SESSION['auth']) && $_SESSION['auth'] === true) { 
     echo "Личный кабинет <script> window.location = 'personal.php';</script>";
 }
+
 
 ?>
 

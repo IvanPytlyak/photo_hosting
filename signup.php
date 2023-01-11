@@ -74,13 +74,47 @@ $usersArr = [];
 
                         // Выходит очень длинная череда if-ов есть альтернатива?
 
+// if (isset($_POST['email']) && isset($_POST['pass1'])){ 
+//     if (array_search($_POST['email'], $usersArr) === false){// что-бы не повторялись email
+//         if(strlen($_POST['email'])>=6 && strlen($_POST['email'])<=12){
+//             if (strlen($_POST['pass1'])>=6 && strlen($_POST['pass1'])<=12){
+//                 if ($_POST['pass1'] === $_POST['pass2']){
+//                     $file = fopen('users.csv', 'a');
+//                     array_push($usersArr, $_POST['email'],$_POST['pass1'], $_POST['name'],$_POST['surname'], $_POST['age']); // пушит не в новую строку сохраняя первого введенного пользователя/ символ
+//                     fputcsv($file, $usersArr, ','); 
+//                     fclose($file);
+//                     echo '<br/><br/><br/> Вы успешно зарегестрированы, вернитесь на стараницу авторизации' . PHP_EOL;
+
+//                     $_SESSION['auth'] = true; // как связать документы не связывая формы, дабы сессия была доступна во всех, будет ли так работать?
+                    
+//                 }
+//                 else{
+//                     // $_SESSION['error_msg'] = 'Неверный пароль или логин'; // как это работает и зачем нужно?
+//                     //если логин или пароль вбиты некорректно, над соответствующим инпутом выводилось сообщение об этом - как это реализуется?
+//                     echo '<br/><br/><br/> Введенные пароли не совпадают' . PHP_EOL;
+//                 }
+//             }
+//             else {
+//                 echo '<br/><br/><br/> Длина пароля должна быть более 6 символов, но менее 12' . PHP_EOL;
+//             }    
+//         }
+//         else {
+//             echo '<br/><br/><br/> Email заполнен не корректно' . PHP_EOL;
+//         }
+//     }
+//     else {
+//         echo '<br/><br/><br/> Веденный e-mail уже зарегестрирован' . PHP_EOL;
+//     }
+// }
+
+
 if (isset($_POST['email']) && isset($_POST['pass1'])){ 
     if (array_search($_POST['email'], $usersArr) === false){// что-бы не повторялись email
         if(strlen($_POST['email'])>=6 && strlen($_POST['email'])<=12){
             if (strlen($_POST['pass1'])>=6 && strlen($_POST['pass1'])<=12){
                 if ($_POST['pass1'] === $_POST['pass2']){
                     $file = fopen('users.csv', 'a');
-                    array_push($usersArr, $_POST['email'],$_POST['pass1'], $_POST['name'],$_POST['surname'], $_POST['age']); // пушит не в новую строку сохраняя первого введенного пользователя/ символ
+                    array_push($usersArr, $_POST['email'], password_hash($_POST['pass1'], PASSWORD_DEFAULT), $_POST['name'],$_POST['surname'], $_POST['age']); // пушит не в новую строку сохраняя первого введенного пользователя/ символ
                     fputcsv($file, $usersArr, ','); 
                     fclose($file);
                     echo '<br/><br/><br/> Вы успешно зарегестрированы, вернитесь на стараницу авторизации' . PHP_EOL;
@@ -106,9 +140,6 @@ if (isset($_POST['email']) && isset($_POST['pass1'])){
         echo '<br/><br/><br/> Веденный e-mail уже зарегестрирован' . PHP_EOL;
     }
 }
-
-
-
 
 // второй вариант (тоже не рабочий)
 // if (!empty($_POST['email']) && !empty($_POST['pass1'])){

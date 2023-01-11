@@ -65,16 +65,18 @@ section {
     flex-direction: row;
     height: 53px;
     width: calc(295px * 2 + 5px );
-    left: 530px;
+    left: 1000px;
     bottom: 240px;
 }
 
 .sign_wrapp_personal{
     z-index: 1;
-    width: 1000px;
+    width: 1400px;
     height: 800px;
     margin: 200px auto 0 auto;
     position: relative;
+    border: 4px solid white;
+    box-shadow: 10px 10px 10px 10px;
 }
 
 
@@ -136,10 +138,31 @@ section {
     margin: 0 5px 0 0;
 }
 
+.pers_wrapp_area {
+    display: flex;
+    flex-direction: row;
+}
 
 
+.add, .see {
+    width: 700px;
+    height: 600px ;
+    border: 1px solid black;
+
+}
+.to_center {
+    margin-left: 35%;
+}
+.img_personal_add {
+    margin-top: 7%;
+}
 
 
+.personal_to_submit{
+    margin: 5% 0 0 15%;
+}
 
-
+.add h2, .see h2 {
+    text-align: center;
+} 
 
