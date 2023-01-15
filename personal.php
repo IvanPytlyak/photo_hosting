@@ -1,3 +1,8 @@
+
+<?php
+session_start();
+?>
+
 <link rel="stylesheet" href="./style.css">
 
 <div class="wrapper">      
@@ -20,25 +25,70 @@
 
                   <input type="submit" class="personal_to_submit" value="Отправить"> 
                 </form> 
-            
+         
+
+
+          <!-- <form action="/personal.php" method="POST" enctype="multipart/form-data">
+              Загрузка каталога:<br />
+              <input name="userfile[]" type="file" webkitdirectory multiple />
+              <input type="submit" value="Загрузить файлы" />
+          </form>       -->
+          <!-- не видит файлы для выгрузки -->
+         
+
+                
 <?php
+
+// function reArrayFiles($file_post) { // берем выгруженный файл '&'-?
+
+//   $file_ary = array();
+//   $file_count = count($file_post['name']); // длинна массива выгруженного файла
+//   $file_keys = array_keys($file_post); // массив его ключей
+
+//   for ($i=0; $i<$file_count; $i++) {
+//       foreach ($file_keys as $key) {
+//           $file_ary[$i][$key] = $file_post[$key][$i];
+//       }
+//   }
+//   return $file_ary;
+// }
+
+// if ($_FILES['upload']) { // $_FILES['upload'] - загруженный файл, // если файл загружен?
+//   $file_ary = reArrayFiles($_FILES['ufile']); // $_FILES['ufile'] - что под этим подразумевается?
+
+//   foreach ($file_ary as $file_1) {
+//       print 'File Name: ' . $file_1['name'];
+//       print 'File Type: ' . $file_1['type'];
+//       print 'File Size: ' . $file_1['size'];
+//   }
+// }
+
+
+
+
+
+
+
+
+
 
 $expensions= array("jpeg","jpg","png");
 
-
-
-
-if (isset($_FILES['myFile'])) { // если не проверять получим 2 строки ошибок до импорта файлов
+if (isset($_FILES['myFile'])) { 
   $errors =[];
   $uploadsDir = 'photo/';
   $file_size =$_FILES['myFile']['size'];
   $nameOfFile = $_FILES['myFile']['name'];
-  $fileName = $uploadsDir . $_FILES['myFile']['name']; // ссылка на файл?  $uploadsDir .  // по факту получается ссылка на личный кабинет, отдельная ссылка для просмотра реализовать через cookie - токен?
+  $directoryName = $uploadsDir . $_SESSION['email'] . '/';
+  if (is_dir($directoryName) == false){
+    mkdir($directoryName);
+  }
+  $fileName = $directoryName . $_FILES['myFile']['name']; 
 
 
-  $file_ext = strtolower(end(explode('.',$_FILES['myFile']['name']))); // почему-то не работает проверка по svg, проходит проверку
+  $file_ext = strtolower(end(explode('.', $_FILES['myFile']['name']))); 
   if(in_array($file_ext,$expensions) === false){
-    $$errors[] = 'Данный формат не подлежит загрузке'; // проверку проходит по стр 35 но все ровно выгружает, хотя выгрузка в if-е на строке 42 + сыпет ошибку о приведении массива к строке
+    $errors[] = 'Данный формат не подлежит загрузке'; // проверку проходит по стр 35 но все ровно выгружает, хотя выгрузка в if-е на строке 42 + сыпет ошибку о приведении массива к строке
   }
   if($file_size --> 2097152){
     $errors[] = "Файл должен быть не более 2 Mb";
@@ -46,20 +96,21 @@ if (isset($_FILES['myFile'])) { // если не проверять получи
  if (empty($errors)== true)  {
   (move_uploaded_file($_FILES['myFile']['tmp_name'], $fileName));
 
-
+  // в виду того что в форме установлено enctype="multipart/form-data", есть возможность выгружать несколько картинок одновременно,
+  // тут пытаюсь решить вопрос их отображения при импорте
   // for ($i=0; $i< count($_FILES['myFile']['name']); $i++){                    // необходим комментарий по корректности оформления ссылки
   //   echo '<img src=' . $uploadsDir . $_FILES['myFile']['name'][$i] . '><br/>';     // и корректности отображения ссылки под выгруженным изображением
   // }
+  
 
-  echo "<img class='to_center img_personal_add' src='$fileName'><br/>";
+  echo "<img class='to_center img_personal_add' src='$fileName'><br/>"; 
   ?>
   <label class="to_center" for="Прямая ссылка на картинку">Прямая ссылка на картинку</label>
   </br>
-  <input type="text" class="to_center" value="http://photo.loc/<?php $fileName ?>">  <!-- не отображает $fileName  -->
+  <input type="text" class="to_center" value="http://photo.loc/<?php echo $fileName ?>">
   </br>
-  <?php
-  // echo  'http://photo.loc/'. $fileName . '<br/><br/>';                                                
-  echo '<a class="to_center" href="/delete.php?filename=' . $nameOfFile . '"> Удалить изображение </a>'; 
+  <?php                                           
+  echo '<a class="to_center" href="/delete.php?directory=' . $_SESSION['email'] . '&filename=' . $nameOfFile . '"> Удалить изображение </a>'; // сюда нужно будет добавить еще одно ветвление /ivan?filename=img.png
   }
   else {
     print_r ($errors);
@@ -75,13 +126,17 @@ if (isset($_FILES['myFile'])) { // если не проверять получи
             <div class="see">
               <h2>Область просмотра</h2>  
                 <?php 
-                $dir = '/photo/';
-                $scan = scandir($_SERVER['DOCUMENT_ROOT'].$dir); // дописать ограничение на виды файлов по анологии с стр 26/ стр39-45
-                foreach ($scan as $part){
-                  echo '<img src="'.$dir.$part.'" /><br/>';
+                $dir_see = 'photo/' . $_SESSION['email'] . '/';
+                if (is_dir( $dir_see) == false){
+                  echo 'У Вас еще нет загруженных файлов';
+                  exit;
                 }
-                // решает вопрос выгрузки всей папки но не дает деталюзацию отображения относительно пользователя
-                // при загрузке формировать массив имен картинок относительно авторизированного пользователя?
+                else{
+                  $files_see = array_diff(scandir($dir_see), ['..', '.']);// получили список изображений пользователя (массив), зачем сравнивать массивы?
+                  foreach ($files_see as $part){
+                    echo '<img src="' . $dir_see . $part . '" /><br/>'; // тут вставить wrapper(flex) и каждую картинку обернуть в div c классом
+                }
+                }
                 ?>  
             </div>
           </div>  

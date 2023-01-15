@@ -33,7 +33,7 @@ if (isset($_POST['email']) && isset($_POST['pass'])){
     $file = fopen('users.csv', 'r');
 
     $logg = [];
-    while (($userData = fgetcsv($file)) != false){ // нужен коммент,  массив не равен false это в каких случаях?
+    while (($userData = fgetcsv($file)) != false){ // из файла формирует массив и бежит по строкам (данным - учетной записи) пока не увидит пустую строку т.е. файл закончился (перебрал базу)
         // if ($_POST['email'] === $userData[0] && $_POST['pass'] === $userData[1]){ 
         if ($_POST['email'] === $userData[0] && password_verify($_POST['pass'], $userData[1]) === true){ 
             $logg = $userData; // залогированный пользователь
@@ -52,7 +52,7 @@ if (isset($_POST['email']) && isset($_POST['pass'])){
         echo '<br/><br/> Заполните данные корректно если Вы не регестрировались - пройдите регистрацию'; 
     }
     else{
-        echo '<br/><br/>Добро пожаловать' . $_SESSION['user'];  //
+        echo '<br/><br/>Добро пожаловать' . $_SESSION['user'];  
     } 
 }
 elseif (!isset($_POST)){  

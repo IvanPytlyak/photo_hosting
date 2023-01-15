@@ -147,11 +147,10 @@ section {
 .add, .see {
     width: 700px;
     height: 600px ;
-    border: 1px solid black;
-
 }
 .to_center {
     margin-left: 35%;
+    width: 300px;
 }
 .img_personal_add {
     margin-top: 7%;

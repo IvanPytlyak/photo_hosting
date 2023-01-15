@@ -1,17 +1,10 @@
 <?php
+session_start();
 include 'personal.php';
 
-if (isset($_GET['fileName'])){
-    unlink('photo/' . $_GET['fileName']);
+if (isset($_GET['filename']) && isset($_GET['directory'])){
+    unlink('photo/' . $_GET['directory'] . '/'. $_GET['filename']);
     header('Location: personal.php');
 }
 
 
-
-// if( isset( $_POST[ 'delite' ] ) ) {
-//     unlink('$path');
-// echo $path;
-//    }
-
-
-// var_dump($_POST);
