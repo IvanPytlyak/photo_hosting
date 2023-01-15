@@ -133,9 +133,11 @@ if (isset($_FILES['myFile'])) {
                 }
                 else{
                   $files_see = array_diff(scandir($dir_see), ['..', '.']);// получили список изображений пользователя (массив), зачем сравнивать массивы?
+                  echo '<div class="wrap_see_all">';
                   foreach ($files_see as $part){
-                    echo '<img src="' . $dir_see . $part . '" /><br/>'; // тут вставить wrapper(flex) и каждую картинку обернуть в div c классом
+                    echo '<img class="inner_img" src="' . $dir_see . $part . '" /><br/>'; 
                 }
+                echo '</div>';
                 }
                 ?>  
             </div>
