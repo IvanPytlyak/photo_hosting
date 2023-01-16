@@ -83,7 +83,7 @@ section {
 .sign_wrapp h1, .sign_wrapp_personal h1 {
     display: block;
     text-align: center;
-    margin: 0 0 50px 0;
+    margin: 0 0 10px 0;
 }
 .row{
     margin-top: 20px;
@@ -148,10 +148,23 @@ section {
     width: 700px;
     height: 630px ;
 }
+
 .to_center {
     margin-left: 35%;
     width: 300px;
+
 }
+
+.to_center_a {
+    color: red;
+    margin-left: 35%;
+    width: 300px;
+}
+
+.to_center_a:hover {
+    color: white;
+}
+
 .img_personal_add {
     margin-top: 7%;
 }
@@ -189,4 +202,34 @@ background-color: green;
 height: 190px;
 width: 30%;
 object-fit:cover;
+}
+
+
+.directory_link {
+    width: 500px;
+    display: block;
+    margin: 0 auto;
+}
+
+
+.row_directory_link{
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+.welcome{
+    font-size: 36px;
+    font-weight: bold;
+    z-index: 1;
+    position: absolute;
+    top:6%;
+    left: 10%;
 }

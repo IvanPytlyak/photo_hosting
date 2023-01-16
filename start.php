@@ -22,7 +22,7 @@
                 <a class="start_a" href="http://photo.loc/login.php">Вход</a>
             </section>
             <section class="exit">
-                <a class="start_a" href="http://photo.loc/start.php">Выход</a>
+                <a class="start_a" href="http://photo.loc/exit.php">Выход</a>
             </section>
            
             

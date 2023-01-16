@@ -42,7 +42,7 @@ if (isset($_POST['email']) && isset($_POST['pass'])){
     fclose($file);
 
     if (count($logg)!=0){
-            $_SESSION['id'] = $logg[5]; // new
+            // $_SESSION['id'] = $logg[5]; // new
             $_SESSION['email'] = $logg[0];
             $_SESSION['user'] = $logg[2];
             $_SESSION['auth'] = true;  
@@ -61,7 +61,8 @@ elseif (!isset($_POST)){
 }
 
 if (isset($_SESSION['auth']) && $_SESSION['auth'] === true) { 
-    echo "Личный кабинет <script> window.location = 'personal.php';</script>";
+    // echo "Личный кабинет <script> window.location = 'personal.php';</script>";
+    header('Location: personal.php?directory=' . $_SESSION['email']); // при переходе по этой ссылке не имея Session['auth']= true закрыть доступ к загрузке/удалению
 }
 
 

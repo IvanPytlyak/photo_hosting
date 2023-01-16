@@ -1,5 +1,6 @@
 
 <?php
+
 session_start();
 ?>
 
@@ -8,10 +9,16 @@ session_start();
 <div class="wrapper">      
     <main>
         <div class="back"></div>
+        <div class="welcome">Добро пожаловать в личный кабинет, <?php echo $_SESSION['user']; ?> </div> 
+
         <div class="sign_wrapp_personal">
 
-          <h1>Личный кабинет</h1>
-
+          <h1>Личный кабинет</h1>  
+          <!-- удалить -->
+          <div class="row_directory_link">
+            <label for="directory_link"><h2>Cсылка на профиль</h2> </label>
+            <input name="directory_link" class="directory_link" type="text" value ="<?php echo 'http://photo.loc/personal.php?directory=' . $_SESSION['email']; ?> " >
+          </div> 
           <div class="a_wrap_personal">
           <!-- <a href="?logout">Выйти</a> -->
             <a class="personal_a" href="/exit.php">Выход</a>
@@ -110,7 +117,7 @@ if (isset($_FILES['myFile'])) {
   <input type="text" class="to_center" value="http://photo.loc/<?php echo $fileName ?>">
   </br>
   <?php                                           
-  echo '<a class="to_center" href="/delete.php?directory=' . $_SESSION['email'] . '&filename=' . $nameOfFile . '"> Удалить изображение </a>'; // сюда нужно будет добавить еще одно ветвление /ivan?filename=img.png
+  echo '<a class="to_center_a" href="/delete.php?directory=' . $_SESSION['email'] . '&filename=' . $nameOfFile . '"> Удалить изображение </a>'; // сюда нужно будет добавить еще одно ветвление /ivan?filename=img.png
   }
   else {
     print_r ($errors);

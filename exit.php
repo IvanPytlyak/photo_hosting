@@ -3,4 +3,4 @@
 session_start();
 session_destroy();
 
-echo "Выход <script> window.location = '/';</script>";
+echo "Выход <script> window.location = 'http://photo.loc/start.php';</script>";
