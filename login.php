@@ -3,28 +3,28 @@ session_start();
 ?>
 
 <link rel="stylesheet" href="./style.css">
-<div class="wrapper">      
-    <main>
-        <div class="back"></div>
-        <div class="sign_wrapp">
-            <h1> Вход </h1>
-            <form method="POST" action="/login.php"> 
-                <div class="row">
-                    <label class="login_label" for="email">Email:</label>
-                    <input class="login_input" name="email" id="email" autocomplete="off">
-                </div>
-                <div class="row">
-                    <label class="login_label" for="pass">Пароль:</label>
-                    <input class="login_input" type="password" name="pass" id="pass">
-                </div>
-                <div class="row">
-                    <!-- <a href="?recovery">Забыли пароль?</a> -->
-                    <a href="/signup.php">Регистрация</a>
-                </div>
-                <div class="row">
-                    <input class="login_input_enter" type="submit"></br></br>
-                </div>
-            </form>
+<div class="back">
+    <div class="wrapper">      
+        <main>
+            <div class="sign_wrapp">
+                <h1> Вход </h1>
+                <form method="POST" action="/login.php"> 
+                    <div class="row">
+                        <label class="login_label" for="email">Email:</label>
+                        <input class="login_input" name="email" id="email" autocomplete="off">
+                    </div>
+                    <div class="row">
+                        <label class="login_label" for="pass">Пароль:</label>
+                        <input class="login_input" type="password" name="pass" id="pass">
+                    </div>
+                    <div class="row">
+                        <!-- <a href="?recovery">Забыли пароль?</a> -->
+                        <a href="/signup.php">Регистрация</a>
+                    </div>
+                    <div class="row">
+                        <input class="login_input_enter" type="submit"></br></br>
+                    </div>
+                </form>
 
 <?php
 
@@ -68,6 +68,7 @@ if (isset($_SESSION['auth']) && $_SESSION['auth'] === true) {
 
 ?>
 
-        </div>
-    </main>
+            </div>
+        </main>
+    </div>
 </div> 

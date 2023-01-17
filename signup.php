@@ -4,43 +4,42 @@ session_start();
 
 <link rel="stylesheet" href="./style.css">
 
-
-<div class="wrapper">      
-    <main>
-        <div class="back"></div>
-        <a class="sign_a" href="http://photo.loc/start.php">На главную</a>
-        <div class="sign_wrapp">
+<div class="back">
+    <div class="wrapper">
+        <main>
+            <a class="sign_a" href="http://photo.loc/start.php">На главную</a>
+            <div class="sign_wrapp">
                 <h1>Регистрация</h1>
                 <form method="POST" action="?signup"> 
-                    <div class="row">
-                        <label class="sign_label" for="email">Email:</label>
-                        <input class="sign_input" name="email" id="email" autocomplete="off">
+                        <div class="row">
+                            <label class="sign_label" for="email">Email:</label>
+                            <input class="sign_input" name="email" id="email" autocomplete="off">
+                        </div>
+                        <div class="row">
+                            <label class="sign_label" for="pass1">Пароль:</label>
+                            <input class="sign_input" type="password" name="pass1" id="pass1">
+                        </div>
+                        <div class="row">
+                            <label class="sign_label" for="pass2">Повтор пароля:</label>
+                            <input class="sign_input" type="password" name="pass2" id="pass2">
+                        </div>
+                        <div class="row">
+                            <label class="sign_label" for="name">Введите имя:</label>
+                            <input class="sign_input" type="text" name="name" id="name">
+                        </div>
+                        <div class="row">
+                            <label class="sign_label" for="surname">Введите фамилию:</label>
+                            <input class="sign_input" type="text" name="surname" id="surname">
+                        </div>
+                        <div class="row">
+                            <label class="sign_label" for="age">Введите возраст:</label>
+                            <input class="sign_input" type="number" name="age" id="age">
+                        </div>
+                        <div class="row">
+                            <input class="sign_input_enter" type="submit">
                     </div>
-                    <div class="row">
-                        <label class="sign_label" for="pass1">Пароль:</label>
-                        <input class="sign_input" type="password" name="pass1" id="pass1">
-                    </div>
-                    <div class="row">
-                        <label class="sign_label" for="pass2">Повтор пароля:</label>
-                        <input class="sign_input" type="password" name="pass2" id="pass2">
-                    </div>
-                    <div class="row">
-                        <label class="sign_label" for="name">Введите имя:</label>
-                        <input class="sign_input" type="text" name="name" id="name">
-                    </div>
-                    <div class="row">
-                        <label class="sign_label" for="surname">Введите фамилию:</label>
-                        <input class="sign_input" type="text" name="surname" id="surname">
-                    </div>
-                    <div class="row">
-                        <label class="sign_label" for="age">Введите возраст:</label>
-                        <input class="sign_input" type="number" name="age" id="age">
-                    </div>
-                    <div class="row">
-                        <input class="sign_input_enter" type="submit">
-                </div>
-            </form>
-  
+                </form>
+    
 
 <?php
 
@@ -188,6 +187,7 @@ echo '</br></br></br> <a href="/login.php">Страница авторизаци
 
 ?>
 
-        </div>
-    </main>
+            </div>
+        </main>
+    </div>   
 </div>
