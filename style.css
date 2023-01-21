@@ -294,3 +294,10 @@ object-fit:cover;
     top:6%;
     left: 10%;
 }
+
+
+
+.page_plus_minus {
+    display: block;
+    text-align: center;
+}
