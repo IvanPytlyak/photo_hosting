@@ -1,5 +1,11 @@
-
 <?php
+require_once __DIR__ . '\logger.php';  //new нужно ли это подключение
+use photo_project\Logger; //new
+
+$logger = new Logger;                                                                                                  //new
+    $logger                                                                                                            //new
+        ->setDataFormat('Y-m-d H:i:s')                                                                                 //new
+        ->setlogType('file');   
 
 session_start();
 ?>
@@ -64,10 +70,18 @@ if (isset($_FILES['myFile'])) {
 
   $file_ext = strtolower(end(explode('.', $_FILES['myFile']['name']))); 
   if(in_array($file_ext,$expensions) === false){
-    $errors[] = 'Данный формат не подлежит загрузке'; 
+    $errors[] = 'Данный формат не подлежит загрузке';
+    
+    $message ='Пользователь с email: ' . $_SESSION['email'] . ' пытался загрузить файл с не поддерживаемым форматом';  //new
+    $logger->log($message);                                                                                            //new
+
   }
   if($file_size --> 2097152){
     $errors[] = "Файл должен быть не более 2 Mb";
+
+    $message ='Пользователь с email: ' . $_SESSION['email'] . ' пытался загрузить файл оъемом выше 2Mb';               //new
+    $logger->log($message);                                                                                            //new 
+
   }
   if (empty($errors)== true)
     {
@@ -75,6 +89,10 @@ if (isset($_FILES['myFile'])) {
   $randomName = uniqid('file_');    
   // (move_uploaded_file($_FILES['myFile']['tmp_name'], $directoryName . uniqid('file_') . $ext));
   (move_uploaded_file($_FILES['myFile']['tmp_name'], $directoryName . $randomName . $ext));
+
+  $message ='Загружено изображение : ' . $randomName;               //new
+  $logger->log($message);                                                                                            //new 
+  
   // (move_uploaded_file($_FILES['myFile']['tmp_name'], $fileName)); 
   header('Location: personal.php?img=' .  $uploadsDir . $_SESSION['email'] . '/' . $randomName . $ext);
  

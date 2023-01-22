@@ -1,4 +1,10 @@
 <?php
+require_once __DIR__ . '\logger.php';  //new
+use photo_project\Logger; //new
+
+
+
+
 session_start();
 ?>
 
@@ -34,7 +40,6 @@ if (isset($_POST['email']) && isset($_POST['pass'])){
 
     $logg = [];
     while (($userData = fgetcsv($file)) != false){ // из файла формирует массив и бежит по строкам (данным - учетной записи) пока не увидит пустую строку т.е. файл закончился (перебрал базу)
-        // if ($_POST['email'] === $userData[0] && $_POST['pass'] === $userData[1]){ 
         if ($_POST['email'] === $userData[0] && password_verify($_POST['pass'], $userData[1]) === true){ 
             $logg = $userData; // залогированный пользователь
         }
@@ -42,7 +47,6 @@ if (isset($_POST['email']) && isset($_POST['pass'])){
     fclose($file);
 
     if (count($logg)!=0){
-            // $_SESSION['id'] = $logg[5]; // new
             $_SESSION['email'] = $logg[0];
             $_SESSION['user'] = $logg[2];
             $_SESSION['auth'] = true;  
@@ -60,10 +64,22 @@ elseif (!isset($_POST)){
     echo '<br/><br/>Заполните корректно данные для входа';
 }
 
-if (isset($_SESSION['auth']) && $_SESSION['auth'] === true) { 
-    // echo "Личный кабинет <script> window.location = 'personal.php';</script>";
-    header('Location: personal.php?directory=' . $_SESSION['email']); // при переходе по этой ссылке не имея Session['auth']= true закрыть доступ к загрузке/удалению
+if (isset($_SESSION['auth']) && $_SESSION['auth'] === true) {
+
+    $logger = new Logger;
+    $logger
+        ->setDataFormat('Y-m-d H:i:s') //new
+        ->setlogType('file'); //new
+    $message ='Авторизирован пользователь с email: ' . $_SESSION['email'];  //new
+    $logger->log($message); //new
+    // как подключить автоматизированно не описывая 5 строк кода?
+
+
+    header('Location: personal.php?directory=' . $_SESSION['email']); 
 }
+
+
+
 
 
 ?>
