@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 *{
     box-sizing: border-box;
     margin: 0;
@@ -145,14 +147,18 @@ section {
 .pers_wrapp_area {
     display: flex;
     flex-direction: row;
-    padding: -20px 0 0 0;
+  justify-content: space-around;
+ 
+    
 }
 
 
 .add, .see {
     width: 700px;
-    height: 630px ;
+    height: 630px;
+
 }
+
 
 .to_center {
     margin-left: 35%;
@@ -223,6 +229,7 @@ form{
 
 .add h2, .see h2 {
     text-align: center;
+   
 } 
 
 
@@ -266,6 +273,8 @@ object-fit:cover;
     width: 500px;
     display: block;
     margin: 10px auto 10px auto;
+     font-weight: 400;
+    font-family: 'Kaushan Script';
 }
 
 
@@ -284,9 +293,10 @@ object-fit:cover;
 
 
 .welcome{
-
+   font-weight: 400;
+    font-family: 'Kaushan Script';
     font-size: 36px;
-    font-weight: bold;
+    /* font-weight: bold; */
     z-index: 3;
     position: absolute;
     width: 800px;
@@ -301,3 +311,9 @@ object-fit:cover;
     display: block;
     text-align: center;
 }
+
+
+
+/* font-family: 'Raleway'; */
+    /* font-weight: 400; */
+    /* font-family: 'Kaushan Script'; */

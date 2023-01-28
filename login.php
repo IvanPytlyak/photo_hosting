@@ -66,7 +66,7 @@ elseif (!isset($_POST)){
 
 if (isset($_SESSION['auth']) && $_SESSION['auth'] === true) {
 
-    $logger = new Logger;
+    $logger = Logger::getInstance();
     $logger
         ->setDataFormat('Y-m-d H:i:s') //new
         ->setlogType('file'); //new
