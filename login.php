@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '\logger.php';  //new
 use photo_project\Logger; //new
-
+$logger = new Logger;
 
 
 
@@ -33,8 +33,6 @@ session_start();
                 </form>
 
 <?php
-
-
 if (isset($_POST['email']) && isset($_POST['pass'])){
     $file = fopen('users.csv', 'r');
 
@@ -65,16 +63,7 @@ elseif (!isset($_POST)){
 }
 
 if (isset($_SESSION['auth']) && $_SESSION['auth'] === true) {
-
-    $logger = Logger::getInstance();
-    $logger
-        ->setDataFormat('Y-m-d H:i:s') //new
-        ->setlogType('file'); //new
-    $message ='Авторизирован пользователь с email: ' . $_SESSION['email'];  //new
-    $logger->log($message); //new
-    // как подключить автоматизированно не описывая 5 строк кода?
-
-
+    $logger->recordToFile('Авторизирован пользователь с email: ' . $_SESSION['email']);
     header('Location: personal.php?directory=' . $_SESSION['email']); 
 }
 

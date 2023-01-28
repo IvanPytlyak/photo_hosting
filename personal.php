@@ -1,3 +1,5 @@
+ <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous"> -->
+
 <?php
 require_once __DIR__ . '\logger.php';  //new нужно ли это подключение
 use photo_project\Logger; 
@@ -11,7 +13,7 @@ session_start();
 
 <?php
 if (isset($_SESSION['auth']) && $_SESSION['auth'] === true){
-  echo '<div class="welcome">Добро пожаловать в личный кабинет, ' . $_SESSION['user'] . '</div>';
+  echo '<div class="welcome">Welcome to My Account, ' . $_SESSION['user'] . '</div>';
 }
 ?>
     <div class="wrapper">      
@@ -21,25 +23,26 @@ if (isset($_SESSION['auth']) && $_SESSION['auth'] === true){
                              
                 <?php
                 if (isset($_SESSION['auth']) && $_SESSION['auth'] === true){
-                  echo '<label for="directory_link"><h2>Cсылка на профиль</h2> </label>';    
+                  echo '<label for="directory_link"><h2>Profile Reference</h2> </label>';    
                   echo '<input name="directory_link" class="directory_link" type="text" value ="http://photo.loc/personal.php?directory=' . $_SESSION['email'] . '" >';
                 
                   echo 
                 '</div> 
                   <div class="a_wrap_personal">
-                  <a class="personal_a" href="/exit.php">Выход</a>
-                  <a class="personal_a" href="http://photo.loc/start.php">На главную</a>
+                  <a class="personal_a" href="/exit.php">Exit</a>
+                  <a class="personal_a" href="http://photo.loc/start.php">Home</a>
                 </div>';
               }
            
                     if (isset($_SESSION['auth']) && $_SESSION['auth'] === true){
                       echo '<div class="pers_wrapp_area">';
                       echo  '<div class="add">';
-                      echo '<h2>Область загрузки</h2> ';
+                      echo '<h2>Download Area</h2> ';
                       echo '<form action="/personal.php" method="POST" enctype="multipart/form-data">';
-                      echo '<input type="file" class="personal_to_submit" name="myFile" multiple>'; 
-                      echo '<input type="submit" class="personal_to_submit" value="Отправить">'; 
-                      echo '</form>'; 
+                      echo '<div class="w2">';
+                      echo '<input type="file" class="personal_to_submit_none" name="myFile" multiple>'; 
+                      echo '<input type="submit" class="personal_to_submit" value="Send"></br>'; 
+                      echo '</div></form>'; 
                     }
                     ?>
                 
@@ -92,12 +95,12 @@ if (isset($_FILES['myFile'])) {
                       $newFileName= $_GET['img'];
                       echo "<img class='to_center img_personal_add' src='$newFileName'><br/>";
                       ?>
-                      <label class="link" for="Прямая ссылка на картинку">Прямая ссылка на картинку</label>
+                      <label class="link" for="Прямая ссылка на картинку">Direct link to picture</label>
                       </br>
                       <input type="text" class="to_center_straight" value="http://photo.loc/<?php echo $newFileName ?>">
                       </br>
                       <?php                                           
-                      echo '<a class="delete" href="/delete.php?img='. $newFileName . '"> Удалить изображение </a>';                    
+                      echo '<a class="delete" href="/delete.php?img='. $newFileName . '"> Delete Image </a>';                    
                     } 
                   }
                    
@@ -105,7 +108,7 @@ if (isset($_FILES['myFile'])) {
                 </div>
                 </div> 
                   <div class="see">
-                    <h2>Область просмотра</h2>  
+                    <h2>View Area</h2>  
                       <?php 
                    
 
@@ -135,7 +138,7 @@ if (isset($_FILES['myFile'])) {
                       }
                       $part = $files_see[$i];
 
-                      if ($session === true){
+                    if ($session === true){
                       echo '<a class="inner_a" href="/personal.php?page=' . $page . '&img='. $dir_see . $part . '"><img class="inner_img"  src="' . $dir_see . $part . '" /></a>';
                     }
                     else {
@@ -144,110 +147,31 @@ if (isset($_FILES['myFile'])) {
 
                     }
                   echo '</div>';
-                  
-                  
+              
                   if($from != 0){
-                    echo '<a class="page_plus_minus" href="' . $a_text . $page-1 . $b_text .'" >Предыдущая страница</a>';
+                    echo '<a class="page_plus_minus" href="' . $a_text . $page-1 . $b_text .'" >Previous page</a>';
                   }
                   if($to<(int) count($files_see)){
-                    echo '<a class="page_plus_minus" href="' . $a_text . $page+1 . $b_text .'" >Следующая страница</a>';
+                    echo '<a class="page_plus_minus" href="' . $a_text . $page+1 . $b_text .'" >Next page</a>';
                   }                             
               }
 
             }                 
 
 // __________________________________________________________________________________________________________________________________________
+                     // условие отображения области с фото при авторизации
                     if (isset($_SESSION['auth']) && $_SESSION['auth'] === true){
                       $keepDir_see = $_SESSION['email'];
                       $a_text_see = 'http://photo.loc/personal.php?page=';
-
-
-                      
-                    // $dir_see = 'photo/' . $_SESSION['email'] . '/';
-                    // if (is_dir( $dir_see) == false){
-                    //   echo 'У Вас еще нет загруженных файлов';
-                    //   exit;
-                    // }                
-                    // else{                    
-                    //     $files_see = array_values(array_diff(scandir($dir_see), ['..', '.'])); 
-                    //     echo '<div class="wrap_see_all">';
-                    //     $page = 1;
-                    //         if (isset($_GET['page'])){
-                    //           $page = (int) $_GET['page'];
-                    //         }
-                    //     $amountOfImages= 9;
-                    //     $to = $page*$amountOfImages;
-                    //     $from =$to-$amountOfImages;
-                    //       for ($i=$from; $i<$to; $i++){
-                    //         if ($i>=count($files_see)){
-                    //           break;
-                    //         }
-                    //         $part = $files_see[$i];
-                    //         echo '<a class="inner_a" href="/personal.php?page=' . $page . '&img='. $dir_see . $part . '"><img class="inner_img"  src="' . $dir_see . $part . '" /></a>';
-                    //       }
-                    //     echo '</div>';
-                        
-                        
-                    //     if($from != 0){
-                    //       echo '<a class="page_plus_minus" href="http://photo.loc/personal.php?page=' . $page-1 .'" >Предыдущая страница</a>';
-                    //     }
-                    //     if($to<(int) count($files_see)){
-                    //       echo '<a class="page_plus_minus" href="http://photo.loc/personal.php?page=' . $page+1 .'" >Следующая страница</a>';
-                    //     }                             
-                    // }
-
-                    displayingListPictures($keepDir_see, $a_text_see, true);
-                    
+                      displayingListPictures($keepDir_see, $a_text_see, true); 
                     }
-
-
 
                     // условие отображения области с фото без авторизации
                     else{
-
-                      
-
-                      
-
                       $keepDir = $_GET['directory']; 
                       $a_text_notsee='http://photo.loc/personal.php?directory=' . $keepDir . '&page=';
                       $b_text_notsee='';                 
-                      // $dir_see = 'photo/' . $keepDir . '/';                     
-                      //   if (is_dir( $dir_see) == false){
-                      //   echo 'У Вас еще нет загруженных файлов';
-                      //   exit;
-                      // }
-
-                      // $files_see = array_values(array_diff(scandir($dir_see), ['..', '.'])); 
-                      // echo '<div class="wrap_see_all">';
-                      // $page = 1;
-                      //     if (isset($_GET['page'])){
-                      //       $page = (int) $_GET['page'];
-                      //     }
-                      // $amountOfImages= 9;
-                      // $to = $page*$amountOfImages;
-                      // $from =$to-$amountOfImages;
-                      //   for ($i=$from; $i<$to; $i++){
-                      //     if ($i>=count($files_see)){
-                      //       break;
-                      //     }
-                      //     $part = $files_see[$i];
-                      //     echo '<img class="inner_a"  src="' . $dir_see . $part . '" />';
-                      //   }
-                      // echo '</div>';
-                      
-                      // if($from != 0){
-                      //   echo '<a class="page_plus_minus" href="http://photo.loc/personal.php?directory=' . $keepDir . '&page=' . $page-1 . '" >Предыдущая страница</a>';
-                      // }
-                      // if($to<(int) count($files_see)){
-                      //   echo '<a class="page_plus_minus" href="http://photo.loc/personal.php?directory=' . $keepDir . '&page=' . $page+1 . '" >Следующая страница</a>';
-                      // } 
-
-                      displayingListPictures($keepDir, $a_text_notsee, $b_text_notsee,false); // фотки стали кликабельны
-
-
-
-                      
+                      displayingListPictures($keepDir, $a_text_notsee, $b_text_notsee,false); 
                     } 
                     ?>  
                   </div>
