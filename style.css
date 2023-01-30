@@ -299,6 +299,15 @@ object-fit:cover;
 /* display: block; */
 }
 
+.inner_img:hover{
+    background-color: green;
+    height: 101%;
+    width: 101%;
+    object-fit:cover;
+    /* display: block; */
+    z-index: 3;
+    }
+
 
 .directory_link {
     width: 500px;
