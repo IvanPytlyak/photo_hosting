@@ -15,19 +15,19 @@ session_start();
             <div class="sign_wrapp">
                 <h1> Вход </h1>
                 <form method="POST" action="/login.php"> 
-                    <div class="row">
+                    <div class="row_signup">
                         <label class="login_label" for="email">Email:</label>
                         <input class="login_input" name="email" id="email" autocomplete="off">
                     </div>
-                    <div class="row">
+                    <div class="row_signup">
                         <label class="login_label" for="pass">Пароль:</label>
                         <input class="login_input" type="password" name="pass" id="pass">
                     </div>
-                    <div class="row">
+                    <div class="row_signup">
                         <!-- <a href="?recovery">Забыли пароль?</a> -->
                         <a href="/signup.php">Регистрация</a>
                     </div>
-                    <div class="row">
+                    <div class="row_signup">
                         <input class="login_input_enter" type="submit"></br></br>
                     </div>
                 </form>

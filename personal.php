@@ -142,7 +142,7 @@ if (isset($_FILES['myFile'])) {
                       echo '<a class="inner_a" href="/personal.php?page=' . $page . '&img='. $dir_see . $part . '"><img class="inner_img"  src="' . $dir_see . $part . '" /></a>';
                     }
                     else {
-                      echo '<img class="inner_a"  src="' . $dir_see . $part. '" />'; // если делать отображение без удалеия в области загрузки - удалить это условие
+                      echo '<img class="inner_a"  src="' . $dir_see . $part. '" />'; 
                     }
 
                     }

@@ -11,31 +11,31 @@ session_start();
             <div class="sign_wrapp">
                 <h1>Регистрация</h1>
                 <form method="POST" action="?signup"> 
-                        <div class="row">
+                        <div class="row_signup">
                             <label class="sign_label" for="email">Email:</label>
                             <input class="sign_input" name="email" id="email" autocomplete="off">
                         </div>
-                        <div class="row">
+                        <div class="row_signup">
                             <label class="sign_label" for="pass1">Пароль:</label>
                             <input class="sign_input" type="password" name="pass1" id="pass1">
                         </div>
-                        <div class="row">
+                        <div class="row_signup">
                             <label class="sign_label" for="pass2">Повтор пароля:</label>
                             <input class="sign_input" type="password" name="pass2" id="pass2">
                         </div>
-                        <div class="row">
+                        <div class="row_signup">
                             <label class="sign_label" for="name">Введите имя:</label>
                             <input class="sign_input" type="text" name="name" id="name">
                         </div>
-                        <div class="row">
+                        <div class="row_signup">
                             <label class="sign_label" for="surname">Введите фамилию:</label>
                             <input class="sign_input" type="text" name="surname" id="surname">
                         </div>
-                        <div class="row">
+                        <div class="row_signup">
                             <label class="sign_label" for="age">Введите возраст:</label>
                             <input class="sign_input" type="number" name="age" id="age">
                         </div>
-                        <div class="row">
+                        <div class="row_signup">
                             <input class="sign_input_enter" type="submit">
                     </div>
                 </form>

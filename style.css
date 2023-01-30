@@ -94,6 +94,13 @@ section {
 .row{
     margin-top: 20px;
 }
+
+.row_signup{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+}
+
 .sign_label, .login_label {
     z-index: 1;
     margin-right: 20px;
